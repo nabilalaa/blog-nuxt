@@ -6,12 +6,6 @@
 					<div class="provider py-8 ml-4">
 						آخر افلام Netflix
 					</div>
-                    
-					<img
-						class="w-20 h-20"
-						src="../assets/images/logo__netflix.png"
-						alt=""
-					/>
 				</div>
 				<NuxtLink
 					class="p-2 px-4 rounded-xl border-2 border-mainColor text-xs font-bold hover:bg-mainColor hover:text-secondaryColor"
