@@ -1,30 +1,45 @@
 <template>
 	<section class="py-24">
 		<div class="container">
-			<!-- {{ this.post.attributes.title }} -->
-			<!-- <h1>{{ post.attributes.title }}</h1> -->
-			<!-- <p class="content" v-html="users[0].content.rendered"></p> -->
-
-			<!-- <div>
-				<img
+			{{ post }}
+			<article>
+				<nuxt-img
+					fit="cover"
+					width="940"
+					height="480"
+					sizes="sm:355px md:320px lg:480px"
+					class="m-auto mb-10"
 					:src="
-						'https://blog-backend-strapi.onrender.com' +
-						post.attributes.cover.data[0].attributes.url
+						url +
+						post.data.attributes.image.data[0]
+							.attributes.url
 					"
 					alt=""
 				/>
-				<h1>{{ post.attributes.title }}</h1>
-				<p class="my-4">
-					{{ post.attributes.createdAt.slice(0, 10) }}
+				<h1>{{ post.data.attributes.title }}</h1>
+
+				<p class="content">
+					{{ post.data.attributes.content }}
 				</p>
-				<p class="content" v-html="post.attributes.content"></p>
+			</article>
+			<!-- <p class="content" v-html="users[0].content.rendered"></p> -->
+			<!-- <article v-for="p in post" :key="p">
+				<h1 v-if="post">{{ p[0].title }}</h1>
+			</article> -->
+			<!-- <div>
+				<h1>{{ post.title }}</h1>
+
+				<div class="content">
+					{{ post.body }}
+				</div>
 			</div> -->
-			<div>
+			<!-- <div>
 				<Meta
 					name="description"
 					:content="post.excerpt.rendered"
 				/>
 				<img
+					class="lg:h-96 h-full w-full"
 					:src="
 						post._embedded['wp:featuredmedia']
 							? post._embedded[
@@ -44,7 +59,7 @@
 					class="content"
 					v-html="post.content.rendered"
 				></div>
-			</div>
+			</div> -->
 		</div>
 	</section>
 </template>
@@ -73,21 +88,20 @@
 // 	}
 // };
 
-const { id } = useRoute().params;
-// const { data: post } = await useFetch(
-// 	`https://blog-backend-strapi.onrender.com/api/blogs/${id}?populate=*`,
-// 	{
-// 		key: id,
-// 		transform: (_posts) => _posts.data
-// 	}
-// );
+const id = useRoute().params.id;
+const url = "https://blog-backend-strapi.onrender.com";
 
 const { data: post } = await useFetch(
-	`https://feline-rail.000webhostapp.com/wp-json/wp/v2/posts/${id}?_embed`,
-	{
-		key: id
-	}
+	`${url}/api/blogs/${id}?populate=image`,
+	{}
 );
+
+// const { data: post } = await useFetch(
+// 	`https://feline-rail.000webhostapp.com/wp-json/wp/v2/posts/${id}?_embed`,
+// 	{
+// 		key: id
+// 	}
+// );
 
 // console.log(document.querySelector(".content"));
 // const convertHtml = computed((content) => {

@@ -1,9 +1,9 @@
 <template>
 	<Html lang="ar" dir="rtl"></Html>
 	<Navbar />
-	<SideMenu />
+	<!-- <SideMenu /> -->
 
-	<slot />
+	<slot></slot>
 </template>
 
 <script>
