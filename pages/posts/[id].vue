@@ -2,26 +2,6 @@
 	<section class="py-24">
 		<div class="container">
 			{{ post }}
-			<article>
-				<nuxt-img
-					fit="cover"
-					width="940"
-					height="480"
-					sizes="sm:355px md:320px lg:480px"
-					class="m-auto mb-10"
-					:src="
-						url +
-						post.data.attributes.image.data[0]
-							.attributes.url
-					"
-					alt=""
-				/>
-				<h1>{{ post.data.attributes.title }}</h1>
-
-				<p class="content">
-					{{ post.data.attributes.content }}
-				</p>
-			</article>
 			<!-- <p class="content" v-html="users[0].content.rendered"></p> -->
 			<!-- <article v-for="p in post" :key="p">
 				<h1 v-if="post">{{ p[0].title }}</h1>
@@ -88,13 +68,10 @@
 // 	}
 // };
 
-const id = useRoute().params.id;
-const url = "https://blog-backend-strapi.onrender.com";
-
-const { data: post } = await useFetch(
-	`${url}/api/blogs/${id}?populate=image`,
-	{}
-);
+const { id } = useRoute().params;
+const { data: post } = await useFetch(`http://127.0.0.1:8000/posts`, {
+	pick: ["articles"]
+});
 
 // const { data: post } = await useFetch(
 // 	`https://feline-rail.000webhostapp.com/wp-json/wp/v2/posts/${id}?_embed`,
