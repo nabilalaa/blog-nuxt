@@ -1,45 +1,45 @@
 <template>
-	<section class="py-24">
+	<section class="about p-4 mt-14">
 		<div class="container">
-			{{ movie }}
-			<!-- <p class="content" v-html="users[0].content.rendered"></p> -->
-			<!-- <article v-for="p in post" :key="p">
-				<h1 v-if="post">{{ p[0].title }}</h1>
-			</article> -->
-			<!-- <div>
-				<h1>{{ post.title }}</h1>
-
-				<div class="content">
-					{{ post.body }}
+			<div class="grid lg:grid-cols-[20%_80%] gap-8">
+				<div class="image w-full sm:w-96 lg:w-full m-auto">
+					<img
+						class="object-cover w-full h-full"
+						:src="`https://image.tmdb.org/t/p/w220_and_h330_face${movie.poster_path}`"
+						alt=""
+					/>
 				</div>
-			</div> -->
-			<!-- <div>
-				<Meta
-					name="description"
-					:content="post.excerpt.rendered"
-				/>
-				<img
-					class="lg:h-96 h-full w-full"
-					:src="
-						post._embedded['wp:featuredmedia']
-							? post._embedded[
-									'wp:featuredmedia'
-							  ][0].source_url
-							: ''
-					"
-					alt=""
-				/>
-				<h1>{{ post.title.rendered }}</h1>
-				<Title>{{ post.title.rendered }}</Title>
-
-				<p class="my-4">
-					{{ post.date.slice(0, 10) }}
-				</p>
-				<div
-					class="content"
-					v-html="post.content.rendered"
-				></div>
-			</div> -->
+				<div class="flex flex-col">
+					<h1 class="mb-4">
+						<span
+							class="text-mainColor text-xl capitalize"
+							>title :
+						</span>
+						{{ movie.title }}
+					</h1>
+					<p class="mb-4">
+						<span
+							class="text-mainColor text-xl capitalize"
+							>budget :
+						</span>
+						{{ movie.budget }}
+					</p>
+					<p class="mb-4">
+						<span
+							class="text-mainColor text-xl capitalize"
+							>release :
+						</span>
+						{{ movie.release_date }}
+					</p>
+					<p class="mb-4">
+						<span
+							class="text-mainColor text-xl capitalize"
+							>overview :
+						</span>
+						{{ movie.overview }}
+					</p>
+				</div>
+			</div>
 		</div>
 	</section>
 </template>
