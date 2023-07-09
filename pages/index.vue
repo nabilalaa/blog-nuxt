@@ -15,9 +15,7 @@
 					</h2>
 					<p>{{ movie.overview }}</p>
 
-					<NuxtLink :to="`posts/${String(movie.id)}`"
-						>تفاصيل</NuxtLink
-					>
+					<NuxtLink :to="String(movie.id)">تفاصيل</NuxtLink>
 				</div>
 				<!-- <Post
 					class="lg:w-[60%] lg:h-full w-full h-96"
