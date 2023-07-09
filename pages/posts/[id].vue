@@ -68,10 +68,15 @@
 // 	}
 // };
 
-const { id } = useRoute().params;
-const { data: post } = await useFetch(`http://127.0.0.1:8000/posts`, {
-	pick: ["articles"]
-});
+// const { id } = useRoute().params;
+// const { data: post } = await useFetch(`http://127.0.0.1:8000/posts`, {
+// 	pick: ["articles"]
+// });
+
+const id = useRoute().params.id;
+const url = "https://blog-backend-strapi.onrender.com";
+
+const { data: post } = await useFetch(`${url}/api/blogs/${id}`, {});
 
 // const { data: post } = await useFetch(
 // 	`https://feline-rail.000webhostapp.com/wp-json/wp/v2/posts/${id}?_embed`,

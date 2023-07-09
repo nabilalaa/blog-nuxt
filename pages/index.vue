@@ -1,28 +1,28 @@
 <template>
 	<section class="py-20" v-if="posts">
 		<div class="container">
-			{{ posts }}
+			{{ posts.data }}
 			<div class="lg:flex gap-4 lg:h-[35rem] h-full">
-				<Post
+				<!-- <Post
 					class="lg:w-[60%] lg:h-full w-full h-96"
 					v-for="post in posts.articles.slice(0, 1)"
 					:key="post"
 					:image="`http://127.0.0.1:8000/media/${post.image}`"
 					:title="post.title"
 					:to="'posts/1'"
-				/>
-				<!-- <Post
-					v-for="post in posts?.data.slice(0, 1)"
+				/> -->
+				<Post
+					v-for="post in posts.data.slice(0, 1)"
 					:key="post"
 					:image="
 						'https://blog-backend-strapi.onrender.com' +
-						post.attributes.cover.data[0].attributes.url
+						post.attributes.image.data[0].attributes.url
 					"
 					class="lg:w-[60%] lg:h-full w-full h-96"
 					:title="post.attributes.title"
 					:to="`posts/${post.id}`"
 					:date="post.attributes.createdAt.slice(0, 10)"
-				/> -->
+				/>
 
 				<!-- <post
 					v-for="post in posts.data?.slice(0, 1)"
@@ -105,10 +105,12 @@
 </template>
 
 <script setup>
-const { data: posts } = await useFetch("http://127.0.0.1:8000/posts", {
-	pick: ["articles"]
-});
-// console.log(posts);
+// const { data: posts } = await useFetch("http://127.0.0.1:8000/posts", {
+// 	pick: ["articles"]
+// });
+const url = "https://blog-backend-strapi.onrender.com";
+const { data: posts } = await useFetch(`${url}/api/blogs?populate=image`);
+console.log(posts);
 // const { data: posts } = useFetch(
 // 	"https://feline-rail.000webhostapp.com/wp-json/wp/v2/posts?_embed",
 // 	{}
