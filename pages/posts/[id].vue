@@ -1,7 +1,7 @@
 <template>
 	<section class="py-24">
 		<div class="container">
-			{{ post }}
+			{{ movie }}
 			<!-- <p class="content" v-html="users[0].content.rendered"></p> -->
 			<!-- <article v-for="p in post" :key="p">
 				<h1 v-if="post">{{ p[0].title }}</h1>
@@ -68,15 +68,26 @@
 // 	}
 // };
 
+const movie_id = useRoute().params.id;
+
+const { data: movie } = await useFetch(
+	`https://api.themoviedb.org/3/movie/${movie_id}`,
+	{
+		headers: {
+			Authorization:
+				"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NDE2ZmExMzA2YWM2ZTg0OGYyYjU5OTIwMWUxNWU1NSIsInN1YiI6IjY0OWFlMzdkYTZkZGNiMDBjNjllZDI2YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mOChB4cP_qoPOw4MF1Q7M5p9gK8dkWbDrCdvkcB3ZGs"
+		}
+	}
+);
 // const { id } = useRoute().params;
 // const { data: post } = await useFetch(`http://127.0.0.1:8000/posts`, {
 // 	pick: ["articles"]
 // });
 
-const id = useRoute().params.id;
-const url = "https://blog-backend-strapi.onrender.com";
+// const id = useRoute().params.id;
+// const url = "https://blog-backend-strapi.onrender.com";
 
-const { data: post } = await useFetch(`${url}/api/blogs/${id}`, {});
+// const { data: post } = await useFetch(`${url}/api/blogs/${id}`, {});
 
 // const { data: post } = await useFetch(
 // 	`https://feline-rail.000webhostapp.com/wp-json/wp/v2/posts/${id}?_embed`,

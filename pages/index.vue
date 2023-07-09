@@ -1,8 +1,24 @@
 <template>
-	<section class="py-20" v-if="posts">
+	<section class="py-20">
 		<div class="container">
-			{{ posts.data }}
-			<div class="lg:flex gap-4 lg:h-[35rem] h-full">
+			<div class="grid grid-cols-6 gap-4 lg:h-[35rem] h-full">
+				<div v-for="movie in movies.results" :key="movie">
+					<div class="image mb-4">
+						<img
+							class="m-auto"
+							:src="`https://image.tmdb.org/t/p/w220_and_h330_face${movie.poster_path}`"
+							alt=""
+						/>
+					</div>
+					<h2 class="font-bold text-lg mb-4">
+						{{ movie.original_title }}
+					</h2>
+					<p>{{ movie.overview }}</p>
+
+					<NuxtLink :to="`posts/${String(movie.id)}`"
+						>تفاصيل</NuxtLink
+					>
+				</div>
 				<!-- <Post
 					class="lg:w-[60%] lg:h-full w-full h-96"
 					v-for="post in posts.articles.slice(0, 1)"
@@ -11,7 +27,7 @@
 					:title="post.title"
 					:to="'posts/1'"
 				/> -->
-				<Post
+				<!-- <Post
 					v-for="post in posts.data.slice(0, 1)"
 					:key="post"
 					:image="
@@ -22,7 +38,7 @@
 					:title="post.attributes.title"
 					:to="`posts/${post.id}`"
 					:date="post.attributes.createdAt.slice(0, 10)"
-				/>
+				/> -->
 
 				<!-- <post
 					v-for="post in posts.data?.slice(0, 1)"
@@ -105,12 +121,22 @@
 </template>
 
 <script setup>
+const { data: movies } = await useFetch(
+	"https://api.themoviedb.org/3/movie/popular",
+	{
+		headers: {
+			Authorization:
+				"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NDE2ZmExMzA2YWM2ZTg0OGYyYjU5OTIwMWUxNWU1NSIsInN1YiI6IjY0OWFlMzdkYTZkZGNiMDBjNjllZDI2YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mOChB4cP_qoPOw4MF1Q7M5p9gK8dkWbDrCdvkcB3ZGs"
+		},
+		pick: ["results"]
+	}
+);
 // const { data: posts } = await useFetch("http://127.0.0.1:8000/posts", {
 // 	pick: ["articles"]
 // });
-const url = "https://blog-backend-strapi.onrender.com";
-const { data: posts } = await useFetch(`${url}/api/blogs?populate=image`);
-console.log(posts);
+// const url = "https://blog-backend-strapi.onrender.com";
+// const { data: posts } = await useFetch(`${url}/api/blogs?populate=image`);
+// console.log(posts);
 // const { data: posts } = useFetch(
 // 	"https://feline-rail.000webhostapp.com/wp-json/wp/v2/posts?_embed",
 // 	{}
