@@ -51,31 +51,6 @@ const { data: movies } = await useFetch(
 		pick: ["results"]
 	}
 );
-// const { data: posts } = await useFetch("http://127.0.0.1:8000/posts", {
-// 	pick: ["articles"]
-// });
-// const url = "https://blog-backend-strapi.onrender.com";
-// const { data: posts } = await useFetch(`${url}/api/blogs?populate=image`);
-// console.log(posts);
-// const { data: posts } = useFetch(
-// 	"https://feline-rail.000webhostapp.com/wp-json/wp/v2/posts?_embed",
-// 	{}
-// );
-// console.log(posts);
-// import axios from "axios";
-// export default {
-// 	data() {
-// 		return {
-// 			posts: []
-// 		};
-// 	},
-// 	mounted() {
-// 		axios.get("http://127.0.0.1:8000/posts").then((response) => {
-// 			this.posts = response.data;
-// 			console.log(response.data);
-// 		});
-// 	}
-// };
 </script>
 
 <style>
