@@ -12,10 +12,8 @@ export default {};
 
 <style>
 @import url("https://fonts.googleapis.com/earlyaccess/droidarabickufi.css");
-
 body {
-	background-color: #14213d;
-	font-family: "Almarai", sans-serif;
-	color: #fff;
+	background: #e2ffdb;
+	font-family: "Droid Arabic Kufi", serif;
 }
 </style>
