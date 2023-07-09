@@ -10,4 +10,12 @@
 export default {};
 </script>
 
-<style></style>
+<style>
+@import url("https://fonts.googleapis.com/earlyaccess/droidarabickufi.css");
+
+body {
+	background-color: #14213d;
+	font-family: "Almarai", sans-serif;
+	color: #fff;
+}
+</style>
