@@ -1,7 +1,9 @@
 <template>
 	<section class="py-20">
 		<div class="container">
-			<div class="grid grid-cols-6 gap-4 lg:h-[35rem] h-full">
+			<div
+				class="grid lg:grid-cols-6 grid-cols-1 gap-4 lg:h-[35rem] h-full"
+			>
 				<div v-for="movie in movies.results" :key="movie">
 					<div class="image mb-4">
 						<img
