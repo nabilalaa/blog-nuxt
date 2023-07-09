@@ -6,6 +6,7 @@
 					<div class="provider py-8 ml-4">
 						آخر افلام Netflix
 					</div>
+                    
 					<img
 						class="w-20 h-20"
 						src="../assets/images/logo__netflix.png"
