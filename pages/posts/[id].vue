@@ -1,5 +1,21 @@
 <template>
-	{{ post }}
+	<div>
+		<!-- {{ post }} -->
+
+		<article>
+			<div class="container">
+				<img
+					:src="
+						url +
+						post.data.attributes.image.data[0]
+							.attributes.url
+					"
+					alt=""
+				/>
+				<h1>{{ post.data.attributes.title }}</h1>
+			</div>
+		</article>
+	</div>
 </template>
 
 <script setup>
@@ -43,9 +59,31 @@
 // });
 
 const id = useRoute().params.id;
+// const url = "http://127.0.0.1:8000";
+
+// const { data: post } = await useFetch(() => `${url}/posts/${id}`, {
+// 	headers: {
+// 		"Content-Type": "application/json",
+// 		"Access-Control-Allow-Origin": "*"
+// 	},
+// 	mode: "no-cors",
+// 	key: id,
+
+// });
+
 const url = "https://blog-backend-strapi.onrender.com";
 
-const { data: post } = await useFetch(`${url}/api/blogs/${id}`, {});
+const { data: post } = await useFetch(
+	() => url + `/api/blogs/${id}?populate=image`
+);
+// console.log(post);
+
+// const url = "http://127.0.0.1:8000";
+
+// const { data: post } = await useFetch(
+// 	() => url + `/api/blogs/${id}?populate=image`
+// );
+// console.log(post);
 
 // const { data: post } = await useFetch(
 // 	`https://feline-rail.000webhostapp.com/wp-json/wp/v2/posts/${id}?_embed`,

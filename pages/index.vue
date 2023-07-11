@@ -1,15 +1,28 @@
 <template>
-	<section class="py-20" v-if="posts">
+	<section class="py-20">
 		<div class="container">
 			{{ posts }}
 			<div class="lg:flex gap-4 lg:h-[35rem] h-full">
+				<!-- <ClientOnly
+					fallback-tag="span"
+					fallback="Loading on server..."
+				> -->
 				<!-- <Post
 					class="lg:w-[60%] lg:h-full w-full h-96"
-					v-for="post in posts.articles.slice(0, 1)"
+					v-for="post in posts.slice(0, 1)"
 					:key="post"
-					:image="`http://127.0.0.1:8000/media/${post.image}`"
+					:image="`http://127.0.0.1:8000/${post.image}`"
 					:title="post.title"
-					:to="'posts/1'"
+					:to="`posts/${post.title}`"
+				/> -->
+				<!-- </ClientOnly> -->
+				<!-- <Post
+					class="lg:w-[60%] lg:h-full w-full h-96"
+					v-for="post in posts.slice(0, 1)"
+					:key="post"
+					:image="`http://127.0.0.1:8000/${post.image}`"
+					:title="post.title"
+					:to="`posts/${post.title}`"
 				/> -->
 				<Post
 					v-for="post in posts?.data.slice(0, 1)"
@@ -105,17 +118,33 @@
 </template>
 
 <script setup>
+// const posts = ref();
+// async function getPosts() {
+// 	await $fetch("http://127.0.0.1:8000/posts")
+// 		.then((response) => {
+// 			console.log(response);
+// 			posts.value = response;
+// 		})
+// 		.catch((error) => {
+// 			console.log(error);
+// 		});
+// }
+
+// const url = "http://127.0.0.1:8000";
+
+// const { data: posts } = await useFetch(() => url + "/posts", {});
+
 const url = "https://blog-backend-strapi.onrender.com";
 
-const { data: posts } = await useFetch(url + "/api/blogs?populate=*", {
-	pick: ["data"]
-});
+const { data: posts } = await useFetch(() => url + "/api/blogs?populate=image");
+
+// console.log(posts);
+// console.log(posts);
 // console.log(posts);
 // const { data: posts } = useFetch(
 // 	"https://feline-rail.000webhostapp.com/wp-json/wp/v2/posts?_embed",
 // 	{}
 // );
-// console.log(posts);
 // import axios from "axios";
 // export default {
 // 	data() {
@@ -124,10 +153,12 @@ const { data: posts } = await useFetch(url + "/api/blogs?populate=*", {
 // 		};
 // 	},
 // 	mounted() {
-// 		axios.get("http://127.0.0.1:8000/posts").then((response) => {
-// 			this.posts = response.data;
-// 			console.log(response.data);
-// 		});
+// 		axios.get("https://django-api-blog.onrender.com/posts").then(
+// 			(response) => {
+// 				this.posts = response.data;
+// 				console.log(response.data);
+// 			}
+// 		);
 // 	}
 // };
 </script>
