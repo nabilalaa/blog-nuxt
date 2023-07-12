@@ -1,8 +1,23 @@
 <template>
 	<section class="py-20">
 		<div class="container">
-			{{ posts }}
+			<!-- {{ posts }} -->
 			<div class="lg:flex gap-4 lg:h-[35rem] h-full">
+				<Post
+					v-for="post in posts?.slice(0, 1)"
+					:key="post"
+					class="lg:w-[60%] lg:h-full w-full h-96"
+					:image="
+						post._embedded['wp:featuredmedia']
+							? post._embedded[
+									'wp:featuredmedia'
+							  ][0].source_url
+							: ''
+					"
+					:to="`posts/${post.id}`"
+					:title="post.title.rendered"
+					:date="post.date.slice(0, 10)"
+				/>
 				<!-- <ClientOnly
 					fallback-tag="span"
 					fallback="Loading on server..."
@@ -11,7 +26,7 @@
 					class="lg:w-[60%] lg:h-full w-full h-96"
 					v-for="post in posts.slice(0, 1)"
 					:key="post"
-					:image="`http://127.0.0.1:8000/${post.image}`"
+					:image="`https://django-api-blog.onrender.com/${post.image}`"
 					:title="post.title"
 					:to="`posts/${post.title}`"
 				/> -->
@@ -24,7 +39,7 @@
 					:title="post.title"
 					:to="`posts/${post.title}`"
 				/> -->
-				<Post
+				<!-- <Post
 					v-for="post in posts?.data.slice(0, 1)"
 					:key="post"
 					:image="
@@ -35,7 +50,7 @@
 					:title="post.attributes.title"
 					:to="`posts/${post.id}`"
 					:date="post.attributes.createdAt.slice(0, 10)"
-				/>
+				/> -->
 
 				<!-- <post
 					v-for="post in posts.data?.slice(0, 1)"
@@ -134,17 +149,17 @@
 
 // const { data: posts } = await useFetch(() => url + "/posts", {});
 
-const url = "https://blog-backend-strapi.onrender.com";
+// const url = "https://django-api-blog.onrender.com";
 
-const { data: posts } = await useFetch(() => url + "/api/blogs?populate=image");
+// const { data: posts } = await useFetch(() => url + "/posts");
 
 // console.log(posts);
 // console.log(posts);
 // console.log(posts);
-// const { data: posts } = useFetch(
-// 	"https://feline-rail.000webhostapp.com/wp-json/wp/v2/posts?_embed",
-// 	{}
-// );
+const { data: posts } = useFetch(
+	"https://feline-rail.000webhostapp.com/wp-json/wp/v2/posts?_embed",
+	{}
+);
 // import axios from "axios";
 // export default {
 // 	data() {

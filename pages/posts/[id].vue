@@ -2,17 +2,26 @@
 	<div>
 		<!-- {{ post }} -->
 
-		<article>
+		<article class="py-24">
 			<div class="container">
+				<h1 class="text-center">{{ post.title.rendered }}</h1>
+				<p class="text-center">{{ post.date }}</p>
+
 				<img
+					class="m-auto w-1/2 my-8"
 					:src="
-						url +
-						post.data.attributes.image.data[0]
-							.attributes.url
+						post._embedded['wp:featuredmedia']
+							? post._embedded[
+									'wp:featuredmedia'
+							  ][0].source_url
+							: ''
 					"
 					alt=""
 				/>
-				<h1>{{ post.data.attributes.title }}</h1>
+				<div
+					class="content"
+					v-html="post.content.rendered"
+				></div>
 			</div>
 		</article>
 	</div>
@@ -70,12 +79,10 @@ const id = useRoute().params.id;
 // 	key: id,
 
 // });
+// const url = "https://django-api-blog.onrender.com";
 
-const url = "https://blog-backend-strapi.onrender.com";
+// const { data: post } = await useFetch(() => url + "/posts/" + id);
 
-const { data: post } = await useFetch(
-	() => url + `/api/blogs/${id}?populate=image`
-);
 // console.log(post);
 
 // const url = "http://127.0.0.1:8000";
@@ -85,12 +92,12 @@ const { data: post } = await useFetch(
 // );
 // console.log(post);
 
-// const { data: post } = await useFetch(
-// 	`https://feline-rail.000webhostapp.com/wp-json/wp/v2/posts/${id}?_embed`,
-// 	{
-// 		key: id
-// 	}
-// );
+const { data: post } = await useFetch(
+	`https://feline-rail.000webhostapp.com/wp-json/wp/v2/posts/${id}?_embed`,
+	{
+		key: id
+	}
+);
 
 // console.log(document.querySelector(".content"));
 // const convertHtml = computed((content) => {
@@ -103,4 +110,69 @@ const { data: post } = await useFetch(
 // const pos = post.value.data[0];
 </script>
 
-<style></style>
+<style scoped>
+.content img {
+	width: 50% !important;
+}
+.content ul {
+	list-style-type: disc !important;
+	list-style-position: inside !important;
+}
+.content ol {
+	list-style-type: decimal !important;
+	list-style-position: inside !important;
+}
+h1 {
+	display: block;
+	font-size: 2em;
+	margin-top: 0.67em;
+	margin-bottom: 0.67em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+h2 {
+	display: block;
+	font-size: 1.5em;
+	margin-top: 0.83em;
+	margin-bottom: 0.83em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+h3 {
+	display: block;
+	font-size: 1.17em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+h4 {
+	display: block;
+	margin-top: 1.33em;
+	margin-bottom: 1.33em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+h5 {
+	display: block;
+	font-size: 0.83em;
+	margin-top: 1.67em;
+	margin-bottom: 1.67em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+h6 {
+	display: block;
+	font-size: 0.67em;
+	margin-top: 2.33em;
+	margin-bottom: 2.33em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+</style>
